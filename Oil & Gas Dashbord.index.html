@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>داشبورد کنترل سبد پروژه‌های هلدینگ نفت و گاز</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap">
+<style>
+:root{--bg:#eef1f3;--sf:#fff;--tx:#14232b;--mu:#5d6f78;--ln:#d8e0e4;--ac:#0b5c73;--up:#0b5c73;--mid:#c27a12;--dn:#6b4fa3;--g:#1f8f55;--a:#d9980b;--r:#c8382f;--hd:#0d2c38;--hdt:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1519;--sf:#142229;--tx:#e6eef1;--mu:#91a5ae;--ln:#25363e;--ac:#4cb5d1;--up:#4cb5d1;--mid:#e6a73a;--dn:#a98ee0;--g:#3cc182;--a:#e8b034;--r:#ee6a60;--hd:#08242e}}
+:root[data-theme="dark"]{--bg:#0c1519;--sf:#142229;--tx:#e6eef1;--mu:#91a5ae;--ln:#25363e;--ac:#4cb5d1;--up:#4cb5d1;--mid:#e6a73a;--dn:#a98ee0;--g:#3cc182;--a:#e8b034;--r:#ee6a60;--hd:#08242e}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Vazirmatn,Tahoma,"Segoe UI",sans-serif;font-size:14px;line-height:1.7}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--hd);z-index:10}
+header{background:linear-gradient(120deg,#0d2c38,#0b5c73 50%,#5a3f94);color:var(--hdt);padding:18px 20px 16px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.chips span{background:rgba(255,255,255,.14);border-radius:14px;padding:2px 12px;font-size:12px}
+h1{margin:0;font-size:20px;font-weight:800}
+header p{margin:2px 0 0;color:#a9c3cc;font-size:12.5px}
+main{max-width:1180px;margin:0 auto;padding:16px}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+.tabs button{font:inherit;border:1px solid var(--ln);background:var(--sf);color:var(--tx);padding:7px 16px;border-radius:20px;cursor:pointer;white-space:nowrap}
+.tabs button[aria-pressed="true"]{background:var(--ac);border-color:var(--ac);color:#fff;font-weight:600}
+.tabs button:focus-visible,tr:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+.k{background:var(--sf);border:1px solid var(--ln);border-radius:8px;padding:12px 14px}
+.k small{color:var(--mu);display:block;font-size:12px}
+.k b{font-size:22px;font-weight:800}
+.k span{font-size:11.5px;color:var(--mu)}
+.sec{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin-bottom:14px}
+.sc{background:var(--sf);border:1px solid var(--ln);border-inline-start:5px solid var(--c);border-radius:8px;padding:12px 14px}
+.sc h3{margin:0;font-size:15px}
+.sc .sub{color:var(--mu);font-size:12px;margin-bottom:8px}
+.row{display:flex;justify-content:space-between;font-size:12.5px;margin-top:4px}
+.bar{height:8px;background:var(--ln);border-radius:4px;overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;background:var(--c)}
+.dots{display:flex;gap:6px;margin-top:8px;font-size:12px}
+.dots span{display:flex;align-items:center;gap:4px}
+.dt{width:10px;height:10px;border-radius:50%;display:inline-block}
+.g{background:var(--g)}.a{background:var(--a)}.r{background:var(--r)}
+.grid2{display:grid;grid-template-columns:1fr 2fr;gap:10px;margin-bottom:14px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+.card{background:var(--sf);border:1px solid var(--ln);border-radius:8px;padding:14px}
+.card h2{margin:0 0 10px;font-size:15px}
+.donut{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.ring{width:120px;height:120px;border-radius:50%;display:grid;place-items:center}
+.ring div{width:78px;height:78px;border-radius:50%;background:var(--sf);display:grid;place-items:center;font-weight:800;font-size:20px}
+.leg div{margin:3px 0;font-size:13px}
+.bc{display:flex;align-items:flex-end;gap:18px;height:150px;padding-top:6px}
+.bg{flex:1;text-align:center;font-size:12px}
+.bs{display:flex;gap:4px;align-items:flex-end;justify-content:center;height:115px}
+.bs i{width:26px;border-radius:3px 3px 0 0}
+.lg{display:flex;gap:14px;font-size:12px;color:var(--mu);margin-top:8px}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:820px}
+th,td{text-align:start;padding:9px 10px;border-bottom:1px solid var(--ln);font-size:13px;white-space:nowrap}
+th{color:var(--mu);font-weight:600;font-size:12px}
+tbody tr{cursor:pointer}
+tbody tr:hover{background:color-mix(in srgb,var(--ac) 8%,transparent)}
+.pb{display:inline-block;width:80px;height:7px;background:var(--ln);border-radius:4px;vertical-align:middle;margin-inline-end:6px;position:relative}
+.pb i{position:absolute;inset:0 auto 0 0;background:var(--c);border-radius:4px}
+[dir=rtl] .pb i{inset:0 0 0 auto}
+.tag{display:inline-block;padding:1px 9px;border-radius:10px;font-size:12px;color:#fff}
+.det{display:none;background:var(--bg);padding:12px 14px;border-radius:8px;margin-top:10px;font-size:13px}
+.det.on{display:block}
+.note{color:var(--mu);font-size:11.5px;margin:12px 0 4px;text-align:center}
+.ph{margin:20px 0 8px;font-size:16px}
+.sm{font-size:12px;color:var(--mu);margin:8px 0 0}
+.grid2.eq{grid-template-columns:1fr 1fr}
+@media(max-width:760px){.grid2.eq{grid-template-columns:1fr}}
+table.t2{min-width:0}
+.card .kpis{margin:0 0 10px;grid-template-columns:repeat(auto-fit,minmax(105px,1fr))}
+.card .k{background:var(--bg)}
+.card .k b{font-size:18px}
+.st{display:flex;height:14px;border-radius:7px;overflow:hidden;margin:4px 0 2px}
+.st i{display:block;height:100%}
+.li{padding:8px 0;border-bottom:1px solid var(--ln);font-size:13px}
+.li:last-child{border:0}
+.li b{display:block}
+.li em{font-style:normal;color:var(--mu);font-size:12px}
+.dg{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;margin-top:10px}
+.dg div{background:var(--bg);border-radius:6px;padding:8px 10px}
+.dg small{display:block;color:var(--mu);font-size:12px}
+.dg b{font-size:16px}
+select{font:inherit;background:var(--sf);color:var(--tx);border:1px solid var(--ln);border-radius:8px;padding:7px 10px;margin-bottom:10px;max-width:100%}
+.pr{display:flex;align-items:center;gap:8px;font-size:12.5px;margin:6px 0}
+.pr>span:first-child{flex:0 0 40%}
+.pr .bar{flex:1;margin:0}
+.lgd{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--mu);margin-top:8px}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:6px;overflow-x:auto;padding:8px 16px;background:var(--sf);border-bottom:1px solid var(--ln)}
+.nav button{font:inherit;font-size:12.5px;border:0;background:transparent;color:var(--tx);padding:4px 12px;border-radius:14px;cursor:pointer;white-space:nowrap}
+.nav button:hover{background:var(--bg)}
+.card,.kpis,.sec,.ph{scroll-margin-top:56px}
+.kpis>.k{border-top:3px solid var(--kx,var(--ln));background:linear-gradient(180deg,color-mix(in srgb,var(--kx,var(--ln)) 12%,var(--sf)),var(--sf))}
+.kpis>.k:nth-child(6n+1){--kx:#3b82d6}.kpis>.k:nth-child(6n+2){--kx:#c27a12}.kpis>.k:nth-child(6n+3){--kx:#c8382f}.kpis>.k:nth-child(6n+4){--kx:#1f8f55}.kpis>.k:nth-child(6n+5){--kx:#6b4fa3}.kpis>.k:nth-child(6n){--kx:#d9980b}
+.card .kpis>.k{background:linear-gradient(180deg,color-mix(in srgb,var(--kx) 14%,var(--bg)),var(--bg))}
+.sc{background:linear-gradient(135deg,color-mix(in srgb,var(--c) 13%,var(--sf)),var(--sf))}
+.card h2::before{content:"";display:inline-block;width:5px;height:17px;border-radius:3px;background:var(--hc,var(--ac));margin-inline-end:8px;vertical-align:-3px}
+.ph{border-inline-start:5px solid var(--ac);padding-inline-start:10px}
+.tabs button[data-f="up"][aria-pressed="true"]{background:var(--up);border-color:var(--up)}
+.tabs button[data-f="mid"][aria-pressed="true"]{background:var(--mid);border-color:var(--mid)}
+.tabs button[data-f="dn"][aria-pressed="true"]{background:var(--dn);border-color:var(--dn)}
+.al{display:none;background:color-mix(in srgb,var(--r) 12%,var(--sf));border:1px solid var(--r);border-radius:8px;padding:10px 14px;margin-top:14px;font-size:13px}
+.al button{font:inherit;font-size:12px;border:1px solid var(--r);background:var(--sf);color:var(--tx);border-radius:14px;padding:1px 10px;margin:4px 0 0 6px;cursor:pointer}
+th[data-k]{cursor:pointer}
+th[data-s]::after{content:" " attr(data-s);color:var(--ac)}
+tr.t-g td:first-child{box-shadow:inset -4px 0 0 var(--g)}
+tr.t-a td:first-child{box-shadow:inset -4px 0 0 var(--a)}
+tr.t-r td:first-child{box-shadow:inset -4px 0 0 var(--r)}
+tr.t-r{background:color-mix(in srgb,var(--r) 6%,transparent)}
+.rk{padding:1px 9px;border-radius:10px;font-size:12px;background:color-mix(in srgb,var(--rc) 16%,transparent);color:var(--rc)}
+.rk.r0{--rc:var(--g)}.rk.r1{--rc:var(--a)}.rk.r2{--rc:var(--r)}
+@media print{.nav,.tabs{display:none}body::before{display:none}}
+.pbtn{font:inherit;font-size:12px;border:0;border-radius:14px;padding:2px 12px;background:#fff;color:#0d2c38;cursor:pointer;font-weight:600}
+.mx{display:grid;grid-template-columns:auto repeat(3,1fr);gap:4px}
+.mx b{font-size:11.5px;color:var(--mu);font-weight:600;align-self:center;text-align:center}
+.mc{min-height:62px;border-radius:6px;padding:4px;display:flex;flex-wrap:wrap;gap:4px;align-content:center;justify-content:center;background:color-mix(in srgb,var(--rc) 18%,var(--sf));border:1px solid color-mix(in srgb,var(--rc) 45%,transparent)}
+.bd{width:26px;height:26px;border-radius:50%;border:0;color:#fff;font:inherit;font-size:12px;cursor:pointer}
+@page{size:A4 landscape;margin:10mm}
+@media print{*{-webkit-print-color-adjust:exact;print-color-adjust:exact}.card,.sc,.k{break-inside:avoid}.pbtn{display:none}}
+.eb{font:inherit;font-size:12.5px;margin-top:10px;width:100%;padding:6px;border-radius:8px;border:1px solid var(--c);background:color-mix(in srgb,var(--c) 14%,var(--sf));color:var(--tx);cursor:pointer;font-weight:600}
+.eb:hover{background:color-mix(in srgb,var(--c) 26%,var(--sf))}
+tr.sub td{background:color-mix(in srgb,var(--c) 14%,var(--sf));font-weight:700}
+.pkt{cursor:pointer}
+.pkt:hover td{background:color-mix(in srgb,var(--ac) 8%,transparent)}
+.pkr>td{background:var(--bg);padding:6px 12px}
+</style>
+</head>
+<body>
+<header>
+<h1>داشبورد کنترل سبد پروژه‌های هلدینگ نفت و گاز</h1>
+<p>وضعیت پروژه‌های بالادستی، میان‌دستی و پایین‌دستی · گزارش مدیریت ارشد · مبالغ به میلیون دلار</p>
+<div class="chips"><span>📅 وضعیت تا ۳۰ مهر ۱۴۰۵</span><span>🛢 بالادستی</span><span>🔗 میان‌دستی</span><span>🏭 پایین‌دستی</span><button class="pbtn" data-pr>🖨 چاپ / ذخیره PDF</button></div>
+</header>
+
+<main>
+
+<div class="al" id="al" role="alert"></div>
+<div class="kpis" id="kpis"></div>
+<div class="sec" id="sec"></div>
+<div class="grid2">
+<div class="card"><h2>توزیع وضعیت پروژه‌ها</h2><div class="donut" id="donut"></div></div>
+<div class="card"><h2>بودجه و هزینه واقعی به تفکیک بخش</h2><div class="bc" id="bc"></div>
+<div class="lg"><span>■ بودجه مصوب</span><span>■ هزینه واقعی تا امروز</span></div></div>
+</div>
+<div class="card"><h2 id="tt">فهرست پروژه‌ها</h2>
+<div class="tw"><table><thead><tr><th data-k="n" title="برای مرتب‌سازی کلیک کنید">پروژه</th><th data-k="s">بخش / مرحله</th><th data-k="b">بودجه</th><th data-k="ac_p">پیشرفت واقعی</th><th data-k="pl">برنامه‌ای</th><th data-k="spi">SPI</th><th data-k="cpi">CPI</th><th data-k="r">ریسک</th><th data-k="e">پایان پیش‌بینی</th><th data-k="h">وضعیت</th></tr></thead><tbody id="tb"></tbody></table></div>
+<div class="det" id="det"></div></div>
+<h2 class="ph">تحلیل روند و ریسک</h2>
+<div class="grid2 eq">
+<div class="card"><h2>منحنی S — پیشرفت تجمعی سبد</h2><div id="scv"></div></div>
+<div class="card"><h2>ماتریس ریسک پروژه‌ها</h2><div id="mtx"></div></div>
+</div>
+<h2 class="ph">گزارش خلاصهٔ مهندسی، تأمین و ساخت (E / P / C)</h2>
+<div class="sec" id="epc"></div>
+<div class="card" id="epd" style="display:none;margin-bottom:14px"></div>
+<div class="grid2 eq">
+<div class="card"><h2>وضعیت HSSE</h2><div id="hsse"></div></div>
+<div class="card"><h2>پرسنل به تفکیک تحصیلات</h2><div id="staff"></div></div>
+</div>
+<div class="grid2 eq">
+<div class="card"><h2>شاخص‌های بهره‌وری</h2><div id="prod"></div></div>
+<div class="card"><h2>رکوردها و راندمان‌های پروژه‌ها</h2><div id="rec"></div></div>
+</div>
+<div class="grid2 eq">
+<div class="card"><h2>مشکلات و پیشنهادات</h2><div id="iss"></div></div>
+<div class="card"><h2>وقایع مهم اخیر</h2><div id="evt"></div></div>
+</div>
+<div class="card"><h2>اطلاعات تکمیلی و جزئی‌تر (Drill-down)</h2>
+<p class="sm" style="margin:0 0 10px">پروژه و موضوع موردنظر را انتخاب کنید. با کلیک روی هر ردیف جدول بالا هم پروژه اینجا انتخاب می‌شود.</p>
+<select id="dsel" aria-label="انتخاب پروژه"></select>
+<div class="tabs" id="dtabs"></div>
+<div id="dbody"></div></div>
+<p class="note">داده‌ها نمونه و برای نمایش ساختار داشبورد است. SPI = پیشرفت واقعی ÷ برنامه‌ای · CPI = ارزش کسب‌شده ÷ هزینه واقعی. سبز: هر دو شاخص ≥ ۰٫۹۵ · زرد: ≥ ۰٫۸۵ · قرمز: کمتر از آن.</p>
+</main>
+<script>
+var SEC={up:{n:"بالادستی",s:"اکتشاف، توسعه میادین و تولید",c:"var(--up)"},mid:{n:"میان‌دستی",s:"انتقال، ذخیره‌سازی و LNG",c:"var(--mid)"},dn:{n:"پایین‌دستی",s:"پالایش، پتروشیمی و توزیع",c:"var(--dn)"}};
+var P=[
+{n:"توسعه فاز ۲ میدان گازی شمالی",s:"up",st:"اجرا",b:1850,ac:1020,pl:58,ac_p:52,r:"متوسط",e:"۱۴۰۶/۱۲",note:"تأخیر در تحویل تجهیزات سرچاهی؛ پیگیری ترخیص گمرکی در جریان است."},
+{n:"حفاری ۱۲ حلقه چاه توسعه‌ای",s:"up",st:"اجرا",b:640,ac:410,pl:70,r:"پایین",ac_p:71,e:"۱۴۰۶/۰۶",note:"حفاری مطابق برنامه؛ نرخ موفقیت چاه‌ها بالاتر از انتظار."},
+{n:"طرح ازدیاد برداشت میدان غربی",s:"up",st:"مهندسی",b:920,ac:150,pl:25,ac_p:16,r:"بالا",e:"۱۴۰۷/۰۹",note:"تأخیر مهندسی پایه و ابهام در تأمین مالی بخش ارزی."},
+{n:"لرزه‌نگاری سه‌بعدی بلوک اکتشافی",s:"up",st:"اکتشاف",b:210,ac:96,pl:48,ac_p:46,r:"متوسط",e:"۱۴۰۵/۱۲",note:"شرایط جوی بر برداشت داده اثر گذاشته است."},
+{n:"احداث خط لوله انتقال گاز ۵۶ اینچ",s:"mid",st:"اجرا",b:1320,ac:880,pl:66,ac_p:67,r:"پایین",e:"۱۴۰۶/۰۴",note:"جوشکاری و لوله‌گذاری جلوتر از برنامه؛ اراضی تحویل شده است."},
+{n:"ایستگاه تقویت فشار گاز",s:"mid",st:"ساخت",b:540,ac:430,pl:72,ac_p:62,r:"بالا",e:"۱۴۰۶/۰۸",note:"تأخیر در ساخت کمپرسورها و افزایش هزینه به‌دلیل تغییر نرخ ارز."},
+{n:"مخازن ذخیره‌سازی نفت خام ترمینال صادراتی",s:"mid",st:"اجرا",b:480,ac:300,pl:60,ac_p:58,r:"متوسط",e:"۱۴۰۶/۰۳",note:"تأیید نهایی طراحی لرزه‌ای انجام شد؛ ریسک پیمانکاری پایین‌آمده است."},
+{n:"واحد LNG کوچک‌مقیاس",s:"mid",st:"مهندسی",b:760,ac:90,pl:20,ac_p:11,r:"بالا",e:"۱۴۰۷/۱۱",note:"انتخاب فناوری با تأخیر؛ لایسنس در دست مذاکره."},
+{n:"ارتقای کیفیت سوخت پالایشگاه جنوب",s:"dn",st:"اجرا",b:1100,ac:700,pl:64,ac_p:63,r:"متوسط",e:"۱۴۰۶/۰۷",note:"نصب راکتور اصلی انجام شد؛ راه‌اندازی در ۲ ماه آینده."},
+{n:"پتروشیمی متانول — واحد دوم",s:"dn",st:"ساخت",b:1450,ac:1240,pl:80,ac_p:78,r:"پایین",e:"۱۴۰۶/۰۱",note:"در آستانه پیش‌راه‌اندازی؛ انحراف جزئی هزینه."},
+{n:"بهینه‌سازی واحد تقطیر پالایشگاه مرکزی",s:"dn",st:"مهندسی",b:380,ac:120,pl:40,ac_p:25,r:"بالا",e:"۱۴۰۶/۱۰",note:"توقف برنامه‌ریزی‌شده (شات‌داون) به‌تأخیر افتاده و سفارش‌ها دیر ثبت شده‌اند."},
+{n:"شبکه توزیع و جایگاه‌های سوخت CNG",s:"dn",st:"اجرا",b:290,ac:215,pl:75,ac_p:76,r:"پایین",e:"۱۴۰۵/۱۱",note:"احداث جایگاه‌ها طبق برنامه؛ ۳ سایت جدید تحویل شد."}
+];
+P.forEach(function(p){p.ev=p.b*p.ac_p/100;p.spi=p.ac_p/p.pl;p.cpi=p.ev/p.ac;var m=Math.min(p.spi,p.cpi);p.h=m>=.95?"g":m>=.85?"a":"r"});
+var HN={g:"روی مسیر",a:"نیازمند توجه",r:"بحرانی"},HC={g:"var(--g)",a:"var(--a)",r:"var(--r)"};
+var f="all",$=function(i){return document.getElementById(i)};
+var fa=function(n,d){return Number(n).toLocaleString("fa-IR",{maximumFractionDigits:d||0,minimumFractionDigits:d||0})};
+function agg(l){var b=0,ac=0,ev=0,pv=0,c={g:0,a:0,r:0};l.forEach(function(p){b+=p.b;ac+=p.ac;ev+=p.ev;pv+=p.b*p.pl/100;c[p.h]++});return{n:l.length,b:b,ac:ac,ev:ev,pv:pv,c:c,pr:b?ev/b*100:0,spi:pv?ev/pv:0,cpi:ac?ev/ac:0}}
+function cls(v){return v>=.95?"var(--g)":v>=.85?"var(--a)":"var(--r)"}
+function render(){
+var l=P.filter(function(p){return f=="all"||p.s==f}),A=agg(l);
+var tabs=[["all","کل سبد"],["up","بالادستی"],["mid","میان‌دستی"],["dn","پایین‌دستی"]];
+
+$("kpis").innerHTML=[["تعداد پروژه",fa(A.n),"در دست اجرا"],["بودجه کل",fa(A.b),"میلیون دلار"],["هزینه واقعی",fa(A.ac),fa(A.ac/A.b*100)+"٪ بودجه"],["پیشرفت وزنی",fa(A.pr,1)+"٪","بر مبنای ارزش کسب‌شده"],["SPI سبد",'<span style="color:'+cls(A.spi)+'">'+fa(A.spi,2)+'</span>',"شاخص عملکرد زمان"],["CPI سبد",'<span style="color:'+cls(A.cpi)+'">'+fa(A.cpi,2)+'</span>',"شاخص عملکرد هزینه"]].map(function(k){return '<div class="k"><small>'+k[0]+'</small><b>'+k[1]+'</b><br><span>'+k[2]+'</span></div>'}).join("");
+$("sec").innerHTML=Object.keys(SEC).filter(function(k){return f=="all"||f==k}).map(function(k){var a=agg(P.filter(function(p){return p.s==k})),s=SEC[k];
+return '<div class="sc" style="--c:'+s.c+'"><h3>'+s.n+' · '+fa(a.n)+' پروژه</h3><div class="sub">'+s.s+'</div><div class="row"><span>بودجه</span><b>'+fa(a.b)+'</b></div><div class="row"><span>پیشرفت وزنی</span><b>'+fa(a.pr,1)+'٪</b></div><div class="bar"><i style="width:'+a.pr+'%"></i></div><div class="row"><span>SPI / CPI</span><b><span style="color:'+cls(a.spi)+'">'+fa(a.spi,2)+'</span> / <span style="color:'+cls(a.cpi)+'">'+fa(a.cpi,2)+'</span></b></div><div class="dots"><span><i class="dt g"></i>'+fa(a.c.g)+'</span><span><i class="dt a"></i>'+fa(a.c.a)+'</span><span><i class="dt r"></i>'+fa(a.c.r)+'</span></div></div>'}).join("");
+var t=A.n,p1=A.c.g/t*100,p2=p1+A.c.a/t*100;
+$("donut").innerHTML='<div class="ring" style="background:conic-gradient(var(--g) 0 '+p1+'%,var(--a) '+p1+'% '+p2+'%,var(--r) '+p2+'% 100%)"><div>'+fa(t)+'</div></div><div class="leg"><div><i class="dt g"></i> روی مسیر: '+fa(A.c.g)+'</div><div><i class="dt a"></i> نیازمند توجه: '+fa(A.c.a)+'</div><div><i class="dt r"></i> بحرانی: '+fa(A.c.r)+'</div></div>';
+var mx=Math.max.apply(null,Object.keys(SEC).map(function(k){return agg(P.filter(function(p){return p.s==k})).b}));
+$("bc").innerHTML=Object.keys(SEC).map(function(k){var a=agg(P.filter(function(p){return p.s==k}));
+return '<div class="bg"><div class="bs"><i style="height:'+a.b/mx*100+'%;background:color-mix(in srgb,'+SEC[k].c+' 28%,var(--sf));border:1px solid '+SEC[k].c+'" title="بودجه"></i><i style="height:'+a.ac/mx*100+'%;background:'+SEC[k].c+'" title="هزینه واقعی"></i></div>'+SEC[k].n+'<br><small>'+fa(a.ac)+' از '+fa(a.b)+'</small></div>'}).join("");
+$("tt").textContent="فهرست پروژه‌ها"+(f=="all"?"":" — "+SEC[f].n);
+var o={g:2,a:1,r:0};l=l.slice().sort(function(x,y){if(!sk)return o[x.h]-o[y.h];var a=x[sk],b=y[sk];if(sk=="r"){a=RK[a];b=RK[b]}else if(sk=="h"){a=o[a];b=o[b]}return(a>b?1:a<b?-1:0)*sd});
+document.querySelectorAll("th[data-k]").forEach(function(h){if(h.dataset.k==sk)h.dataset.s=sd>0?"▲":"▼";else h.removeAttribute("data-s")});
+$("tb").innerHTML=l.map(function(p){var i=P.indexOf(p);
+return '<tr class="t-'+p.h+'" tabindex="0" data-i="'+i+'"><td><b>'+p.n+'</b></td><td><i class="dt" style="background:'+SEC[p.s].c+'"></i> '+SEC[p.s].n+' · '+p.st+'</td><td>'+fa(p.b)+'</td><td><span class="pb" style="--c:'+SEC[p.s].c+'"><i style="width:'+p.ac_p+'%"></i></span>'+fa(p.ac_p)+'٪</td><td>'+fa(p.pl)+'٪</td><td style="color:'+cls(p.spi)+'">'+fa(p.spi,2)+'</td><td style="color:'+cls(p.cpi)+'">'+fa(p.cpi,2)+'</td><td><span class="rk r'+RK[p.r]+'">'+p.r+'</span></td><td>'+p.e+'</td><td><span class="tag" style="background:'+HC[p.h]+'">'+HN[p.h]+'</span></td></tr>'}).join("");
+$("det").className="det";render2();
+}
+document.addEventListener("click",function(e){var b=e.target.closest("[data-f]");if(b){f=b.dataset.f;render();return}
+var r=e.target.closest("tr[data-i]");if(r)show(r.dataset.i)});
+document.addEventListener("keydown",function(e){if(e.key=="Enter"){var r=e.target.closest&&e.target.closest("tr[data-i]");if(r)show(r.dataset.i)}});
+function show(i){var p=P[i],d=$("det");d.className="det on";d.innerHTML="<b>"+p.n+"</b> — هزینه واقعی: "+fa(p.ac)+" از "+fa(p.b)+" میلیون دلار · ارزش کسب‌شده: "+fa(p.ev)+"<br>"+p.note;d.scrollIntoView({block:"nearest"})}
+var X=[
+{e:[96,100,78,88,22,32],h:[8.4,1,46,2,91],s:[180,240,420,150,9],pf:.94,rw:3.8,rec:"",is:"تأخیر ترخیص تجهیزات سرچاهی روی مسیر بحرانی",sg:"حمل هوایی اقلام بحرانی و ترخیص اولویت‌دار با هماهنگی گمرک",ev:["1405/07/24","رسیدن نخستین محمولهٔ تجهیزات سرچاهی به سایت","g"]},
+{e:[100,100,92,95,58,60],h:[3.1,0,28,0,95],s:[90,120,160,60,4],pf:1.03,rw:1.9,rec:"کوتاه‌ترین زمان حفاری هر چاه: ۳۸ روز (۱۲٪ زیر برنامه)",is:"محدودیت موقت دسترسی به سیمان حفاری",sg:"تأمین از دو منبع و نگهداری موجودی اطمینان",ev:["1405/07/18","تکمیل حلقه چاه شمارهٔ ۸ با نرخ تولید بالاتر از پیش‌بینی","g"]},
+{e:[38,60,22,40,0,0],h:[0.9,0,9,0,88],s:[20,35,70,45,6],pf:.78,rw:4.6,rec:"",is:"تأخیر مهندسی پایه و ابهام در تأمین مالی بخش ارزی",sg:"تشکیل کارگروه مالی و تقسیم طرح به دو فاز اجرایی",ev:["1405/07/09","جلسهٔ بازنگری هزینه با مدیرعامل برگزار شد؛ تغییر دامنه در دست بررسی","r"]},
+{e:[90,92,60,62,20,22],h:[1.2,0,14,1,90],s:[30,40,80,35,5],pf:.96,rw:2.4,rec:"",is:"شرایط جوی و توقف برداشت داده",sg:"افزودن شیفت برداشت و تغییر زمان‌بندی عملیات",ev:["1405/06/29","تکمیل ۶۰٪ برداشت داده لرزه‌ای","g"]},
+{e:[100,100,95,95,48,50],h:[11.5,2,63,1,89],s:[420,310,260,70,3],pf:1.05,rw:1.7,rec:"رکورد جوشکاری: ۱٫۲ کیلومتر خط در روز با راندمان جوش ۹۸٫۵٪",is:"دو حادثهٔ توقف کار در مسیر لوله‌گذاری",sg:"بازآموزی ایمنی کارگاهی و تقویت نظارت ناظران HSE",ev:["1405/07/21","عبور خط لوله از رودخانهٔ اصلی با روش حفاری افقی","g"]},
+{e:[100,100,70,92,34,50],h:[4.7,1,38,2,84],s:[160,150,190,55,3],pf:.82,rw:5.2,rec:"",is:"تأخیر ساخت کمپرسورها و افزایش هزینه ناشی از نرخ ارز",sg:"بازرسی کارخانه‌ای مشترک و قراردادهای ارزی با پوشش ریسک",ev:["1405/07/12","اعلام تأخیر ۷۵ روزه از سازندهٔ کمپرسور","r"]},
+{e:[100,100,85,88,36,40],h:[3.8,0,31,0,93],s:[110,120,150,45,2],pf:.98,rw:2.2,rec:"رکورد نصب مخازن: دو مخزن ذخیره در ماه",is:"ریسک پیمانکاری در انتهای پروژه",sg:"ارزیابی ماهانهٔ پیمانکاران و تضمین عملکرد",ev:["1405/06/30","تأیید نهایی طراحی لرزه‌ای مخازن","g"]},
+{e:[30,50,8,22,0,0],h:[0.7,0,6,0,87],s:[12,18,60,38,5],pf:.74,rw:3.1,rec:"",is:"تأخیر انتخاب فناوری و لایسنس",sg:"تصمیم‌گیری در ۳۰ روز آینده و ارزیابی همزمان دو گزینه",ev:["1405/07/05","جلسهٔ مذاکرهٔ لایسنس فناوری مایع‌سازی","a"]},
+{e:[100,100,82,85,44,46],h:[9.2,1,52,1,90],s:[350,300,380,120,8],pf:.97,rw:2.6,rec:"راندمان مصرف انرژی واحد: ۶٪ بهتر از طراحی",is:"هماهنگی راه‌اندازی راکتور با واحدهای مجاور",sg:"تدوین برنامهٔ راه‌اندازی یکپارچه و تمرین پیش‌راه‌اندازی",ev:["1405/07/15","نصب راکتور اصلی انجام شد","g"]},
+{e:[100,100,98,98,64,68],h:[14.6,1,71,0,94],s:[610,480,520,160,10],pf:.99,rw:2.0,rec:"۶ میلیون نفرساعت متوالی بدون حادثهٔ توقف کار (LTI)",is:"محدودیت زمان تعمیرات توقف برنامه‌ریزی‌شده",sg:"شروع زودتر پیش‌ساخت و جابه‌جایی اقلام",ev:["1405/07/27","آغاز پیش‌راه‌اندازی بخش سرد واحد","g"]},
+{e:[62,90,18,35,0,5],h:[1.1,1,12,1,82],s:[40,55,90,40,3],pf:.70,rw:6.1,rec:"",is:"تأخیر ثبت سفارش و ناهماهنگی با زمان شات‌داون",sg:"بازنگری برنامهٔ توقف و ثبت فوری سفارش اقلام با زمان تحویل طولانی",ev:["1405/07/20","اعلام تأخیر شات‌داون به ۳ ماه بعد","r"]},
+{e:[100,100,95,95,58,56],h:[3.9,0,24,0,92],s:[90,110,140,30,1],pf:1.04,rw:1.5,rec:"نصب ۳ جایگاه در ۴۵ روز؛ ۱۵٪ سریع‌تر از برنامه",is:"محدودیت پرسنل نصب در برخی استان‌ها",sg:"استفاده از پیمانکار محلی و آموزش سریع",ev:["1405/07/22","تحویل سه جایگاه CNG جدید","g"]}
+];
+var dp=0,dt="fin";
+function d2(s){return s.replace(/\d/g,function(c){return "۰۱۲۳۴۵۶۷۸۹"[c]})}
+function sm(a,fn){return a.reduce(function(s,i){return s+fn(i)},0)}
+function kp(l,v,s){return '<div class="k"><small>'+l+'</small><b>'+v+'</b><br><span>'+s+'</span></div>'}
+function ok(c){return c=='g'?'روی مسیر':c=='a'?'نیازمند توجه':'بحرانی'}
+function render2(){
+var I=P.map(function(_,i){return i}).filter(function(i){return f=="all"||P[i].s==f}),B=sm(I,function(i){return P[i].b});
+var nm=["مهندسی (E)","تأمین و خرید (P)","ساخت و اجرا (C)"];
+$("epc").innerHTML=nm.map(function(n,k){var a=sm(I,function(i){return P[i].b*X[i].e[2*k]})/B,p=sm(I,function(i){return P[i].b*X[i].e[2*k+1]})/B,d=a-p;
+var w=I.slice().sort(function(x,y){return(X[x].e[2*k]-X[x].e[2*k+1])-(X[y].e[2*k]-X[y].e[2*k+1])})[0],wd=X[w].e[2*k]-X[w].e[2*k+1],c=d>=-2?'g':d>=-8?'a':'r';
+return '<div class="sc" style="--c:'+['#3b82d6','#e8832f','#2fa87e'][k]+'"><h3>'+n+' <span class="tag" style="background:var(--'+c+')">'+ok(c)+'</span></h3><div class="row"><span>واقعی</span><b>'+fa(a,1)+'٪</b></div><div class="bar"><i style="width:'+a+'%"></i></div><div class="row"><span>برنامه‌ای</span><b>'+fa(p,1)+'٪</b></div><div class="bar"><i style="width:'+p+'%;background:var(--mu)"></i></div><p class="sm">انحراف '+fa(d,1)+'٪؛ وضعیت: '+ok(c)+'. عقب‌ترین پروژه: '+P[w].n+' ('+fa(wd)+'٪).</p><button class="eb" data-ep="'+k+'">'+(ek===k?'بستن جزئیات':'مشاهده جزئیات به تفکیک بخش و پروژه')+' ◂</button></div>'}).join("");
+var mh=sm(I,function(i){return X[i].h[0]}),lt=sm(I,function(i){return X[i].h[1]}),au=sm(I,function(i){return X[i].h[4]*X[i].h[0]})/mh,lf=lt/mh;
+var lc=function(v){return v<=.3?'var(--g)':v<=.6?'var(--a)':'var(--r)'};
+$("hsse").innerHTML='<div class="kpis">'+kp('نفرساعت ایمن',fa(mh,1),'میلیون')+kp('حوادث LTI',fa(lt),'توقف کار')+kp('LTIFR','<span style="color:'+lc(lf)+'">'+fa(lf,2)+'</span>','به ازای میلیون نفرساعت')+kp('امتیاز ممیزی',fa(au)+'٪','میانگین وزنی')+'</div><table class="t2"><thead><tr><th>بخش</th><th>LTI</th><th>LTIFR</th><th>شبه‌حادثه</th><th>زیست‌محیطی</th><th>ممیزی</th></tr></thead><tbody>'+Object.keys(SEC).filter(function(k){return f=="all"||f==k}).map(function(k){var J=I.filter(function(i){return P[i].s==k}),m=sm(J,function(i){return X[i].h[0]}),l=sm(J,function(i){return X[i].h[1]});return '<tr><td>'+SEC[k].n+'</td><td>'+fa(l)+'</td><td style="color:'+lc(l/m)+'">'+fa(l/m,2)+'</td><td>'+fa(sm(J,function(i){return X[i].h[2]}))+'</td><td>'+fa(sm(J,function(i){return X[i].h[3]}))+'</td><td>'+fa(sm(J,function(i){return X[i].h[4]*X[i].h[0]})/m)+'٪</td></tr>'}).join("")+'</tbody></table>';
+var ed=["دیپلم و زیر","کاردانی","کارشناسی","ارشد","دکترا"],ec=["#7aa9b8","#4a8ea6","#0b5c73","#c27a12","#6b4fa3"];
+var tot=ed.map(function(_,j){return sm(I,function(i){return X[i].s[j]})}),T=tot.reduce(function(a,b){return a+b},0);
+$("staff").innerHTML='<div class="kpis">'+kp('کل پرسنل',fa(T),'نفر')+kp('کارشناسی و بالاتر',fa((tot[2]+tot[3]+tot[4])/T*100)+'٪','از کل پرسنل')+'</div>'+Object.keys(SEC).filter(function(k){return f=="all"||f==k}).map(function(k){var J=I.filter(function(i){return P[i].s==k}),v=ed.map(function(_,j){return sm(J,function(i){return X[i].s[j]})}),t=v.reduce(function(a,b){return a+b},0);return '<div class="row"><b>'+SEC[k].n+'</b><span>'+fa(t)+' نفر</span></div><div class="st">'+v.map(function(x,j){return '<i style="width:'+x/t*100+'%;background:'+ec[j]+'" title="'+ed[j]+': '+fa(x)+'"></i>'}).join("")+'</div>'}).join("")+'<div class="lgd">'+ed.map(function(n,j){return '<span><i class="dt" style="background:'+ec[j]+'"></i> '+n+': '+fa(tot[j])+'</span>'}).join("")+'</div>';
+var pf=sm(I,function(i){return P[i].b*X[i].pf})/B;
+$("prod").innerHTML='<p class="sm" style="margin:0 0 6px">ضریب بهره‌وری (PF) میانگین وزنی: <b style="color:'+cls(pf)+'">'+fa(pf,2)+'</b> · میانگین دوباره‌کاری: '+fa(sm(I,function(i){return X[i].rw})/I.length,1)+'٪</p>'+I.slice().sort(function(a,b){return X[a].pf-X[b].pf}).map(function(i){return '<div class="pr"><span>'+P[i].n+'</span><div class="bar" style="--c:'+cls(X[i].pf)+'"><i style="width:'+Math.min(100,X[i].pf/1.2*100)+'%"></i></div><span>'+fa(X[i].pf,2)+' · '+fa(X[i].rw,1)+'٪</span></div>'}).join("")+'<p class="sm">مقدار اول: ضریب بهره‌وری (ساعت‌نفر کسب‌شده به مصرفی)؛ مقدار دوم: درصد دوباره‌کاری.</p>';
+var R=I.filter(function(i){return X[i].rec});
+$("rec").innerHTML=R.length?R.map(function(i){return '<div class="li"><b>'+X[i].rec+'</b><em>'+P[i].n+' · '+SEC[P[i].s].n+'</em></div>'}).join(""):'<p class="sm">رکوردی برای این بخش ثبت نشده است.</p>';
+var o={r:0,a:1,g:2},S=I.slice().sort(function(a,b){return o[P[a].h]-o[P[b].h]});
+$("iss").innerHTML=S.slice(0,6).map(function(i){return '<div class="li"><b><i class="dt '+P[i].h+'"></i> '+P[i].n+'</b>مشکل: '+X[i].is+'<br><em>پیشنهاد: '+X[i].sg+'</em></div>'}).join("")+(S.length>6?'<p class="sm">'+fa(S.length-6)+' پروژهٔ دیگر در بخش اطلاعات تکمیلی قابل مشاهده است.</p>':'');
+$("evt").innerHTML=I.slice().sort(function(a,b){return X[a].ev[0]<X[b].ev[0]?1:-1}).slice(0,7).map(function(i){var v=X[i].ev;return '<div class="li"><b><i class="dt '+v[2]+'"></i> '+v[1]+'</b><em>'+d2(v[0])+' · '+P[i].n+'</em></div>'}).join("");
+curve(I,B);mtx(I);epd(I);var Rr=I.filter(function(i){return P[i].h=="r"});$("al").style.display=Rr.length?"block":"none";$("al").innerHTML='⚠ <b>'+fa(Rr.length)+' پروژهٔ بحرانی نیازمند تصمیم مدیریت</b> (برای مشاهدهٔ جزئیات کلیک کنید):<br>'+Rr.map(function(i){return '<button data-d="'+i+'">'+P[i].n+'</button>'}).join("");
+drill();
+}
+function kv(l,v){return '<div><small>'+l+'</small><b>'+v+'</b></div>'}
+function drill(){
+var p=P[dp],x=X[dp],h="";
+if(dt=="fin"){var eac=p.b/p.cpi;h=kv('بودجه مصوب',fa(p.b)+' م$')+kv('هزینه واقعی',fa(p.ac)+' م$')+kv('ارزش کسب‌شده (EV)',fa(p.ev)+' م$')+kv('CPI',fa(p.cpi,2))+kv('برآورد هزینه در زمان تکمیل (EAC)',fa(eac)+' م$')+kv('انحراف پیش‌بینی (VAC)',fa(p.b-eac)+' م$')+kv('TCPI',fa((p.b-p.ev)/(p.b-p.ac),2))}
+else if(dt=="sch"){h=kv('پیشرفت برنامه‌ای',fa(p.pl)+'٪')+kv('پیشرفت واقعی',fa(p.ac_p)+'٪')+kv('SPI',fa(p.spi,2))+kv('انحراف پیشرفت',fa(p.ac_p-p.pl)+'٪')+kv('پایان پیش‌بینی',p.e)+kv('مرحله',p.st)}
+else if(dt=="epc"){h=["مهندسی (E)","تأمین (P)","ساخت (C)"].map(function(n,k){return kv(n,'واقعی '+fa(x.e[2*k])+'٪ از برنامه '+fa(x.e[2*k+1])+'٪')}).join("")}
+else if(dt=="hs"){h=kv('نفرساعت ایمن',fa(x.h[0],1)+' میلیون')+kv('حوادث LTI',fa(x.h[1]))+kv('LTIFR',fa(x.h[1]/x.h[0],2))+kv('شبه‌حادثه',fa(x.h[2]))+kv('رخداد زیست‌محیطی',fa(x.h[3]))+kv('امتیاز ممیزی',fa(x.h[4])+'٪')}
+else if(dt=="hr"){h=["دیپلم و زیر","کاردانی","کارشناسی","ارشد","دکترا"].map(function(n,j){return kv(n,fa(x.s[j])+' نفر')}).join("")+kv('جمع پرسنل',fa(x.s.reduce(function(a,b){return a+b},0))+' نفر')}
+else{h=kv('سطح ریسک',p.r)+kv('وضعیت کلی',ok(p.h))+kv('مشکل اصلی',x.is)+kv('پیشنهاد اقدام',x.sg)+kv('آخرین رویداد',d2(x.ev[0])+' — '+x.ev[1])+kv('توضیح مدیر پروژه',p.note)}
+var T=[["fin","مالی"],["sch","زمان‌بندی"],["epc","E/P/C"],["hs","HSSE"],["hr","منابع انسانی"],["rk","ریسک و مشکلات"]];
+$("dtabs").innerHTML=T.map(function(t){return '<button aria-pressed="'+(dt==t[0])+'" data-dt="'+t[0]+'">'+t[1]+'</button>'}).join("");
+$("dbody").innerHTML='<div class="dg">'+h+'</div>';
+}
+$("dsel").innerHTML=P.map(function(p,i){return '<option value="'+i+'">'+p.n+' ('+SEC[p.s].n+')</option>'}).join("");
+$("dsel").addEventListener("change",function(){dp=+this.value;drill()});
+document.addEventListener("click",function(e){var b=e.target.closest("[data-dt]");if(b){dt=b.dataset.dt;drill();return}var r=e.target.closest("tr[data-i]");if(r){dp=+r.dataset.i;$("dsel").value=dp;drill()}});
+var RK={"پایین":0,"متوسط":1,"بالا":2},sk=null,sd=1,PAL=["#0b5c73","#c27a12","#6b4fa3","#1f8f55","#d9980b","#c8382f","#3b82d6","#e8832f","#2fa87e"];
+document.querySelectorAll(".card h2").forEach(function(h,i){h.style.setProperty("--hc",PAL[i%PAL.length])});
+document.addEventListener("click",function(e){var g=e.target.closest("[data-go]");if(g){var el=$(g.dataset.go),pv=el.previousElementSibling,t=el.closest(".card")||(pv&&pv.classList.contains("ph")?pv:el);t.scrollIntoView({behavior:"smooth",block:"start"});return}
+var d=e.target.closest("[data-d]");if(d){dp=+d.dataset.d;dt="rk";$("dsel").value=dp;drill();$("dsel").closest(".card").scrollIntoView({behavior:"smooth",block:"start"});return}
+var h=e.target.closest("th[data-k]");if(h){sd=sk==h.dataset.k?-sd:1;sk=h.dataset.k;render()}});
+var Q=[[2,3],[1,2],[3,3],[2,2],[1,3],[3,3],[2,2],[3,2],[2,2],[1,2],[3,2],[1,1]];
+function S(t){t=Math.max(0,Math.min(1,t));return t*t*(3-2*t)}
+function curve(I,B){
+var A=sm(I,function(i){return P[i].ev})/B*100,Pp=sm(I,function(i){return P[i].b*P[i].pl/100})/B*100,sp=A/Pp,N=9,M=18,W=600,H=230,L=10,R=42,T=12,Bm=30,fin=Math.min(9,6/sp);
+var xs=function(m){return L+(1-m/M)*(W-L-R)},ys=function(v){return T+(1-v/100)*(H-T-Bm)};
+var pln=function(m){return m<=N?Pp*S(m/N):Pp+(100-Pp)*S((m-N)/6)};
+var pa="",pb="",pc="",g="",m;
+for(m=0;m<=M;m+=.5){var q=xs(m).toFixed(1);pa+=(m?"L":"M")+q+" "+ys(pln(m)).toFixed(1);
+if(m<=N)pb+=(m?"L":"M")+q+" "+ys(A*S(m/N)).toFixed(1);
+if(m>=N)pc+=(m==N?"M":"L")+q+" "+ys(A+(100-A)*S((m-N)/fin)).toFixed(1)}
+[0,25,50,75,100].forEach(function(v){g+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+ys(v)+'" y2="'+ys(v)+'" stroke="var(--ln)"/><text x="'+(W-R+6)+'" y="'+(ys(v)+4)+'" font-size="11" fill="var(--mu)">'+fa(v)+'٪</text>'});
+[0,3,6,9,12,15,18].forEach(function(k){g+='<text x="'+xs(k)+'" y="'+(H-10)+'" font-size="11" text-anchor="middle" fill="var(--mu)">'+fa(k)+'</text>'});
+g+='<line x1="'+xs(N)+'" x2="'+xs(N)+'" y1="'+T+'" y2="'+(H-Bm)+'" stroke="var(--a)" stroke-dasharray="4 3"/><text x="'+xs(N)+'" y="10" font-size="11" text-anchor="middle" fill="var(--a)">اکنون</text>';
+$("scv").innerHTML='<svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img" aria-label="منحنی S پیشرفت تجمعی">'+g+'<path d="'+pa+'" fill="none" stroke="var(--mu)" stroke-width="2.5"/><path d="'+pb+'" fill="none" stroke="var(--ac)" stroke-width="3.5"/><path d="'+pc+'" fill="none" stroke="var(--r)" stroke-width="2.5" stroke-dasharray="6 4"/><circle cx="'+xs(N)+'" cy="'+ys(A)+'" r="5" fill="var(--ac)"/><circle cx="'+xs(N)+'" cy="'+ys(Pp)+'" r="5" fill="var(--mu)"/></svg><div class="lgd"><span><i class="dt" style="background:var(--mu)"></i> برنامه‌ای</span><span><i class="dt" style="background:var(--ac)"></i> واقعی</span><span><i class="dt" style="background:var(--r)"></i> پیش‌بینی با روند فعلی</span></div><p class="sm">پیشرفت واقعی '+fa(A,1)+'٪ در برابر برنامه '+fa(Pp,1)+'٪ (SPI '+fa(sp,2)+'). با روند فعلی، تکمیل حدود '+fa(fin,1)+' ماه دیگر پیش‌بینی می‌شود؛ مبنای برنامه ۶ ماه است. محور افقی: ماه از ابتدای بازه (از راست به چپ).</p>'}
+function mtx(I){
+var pl=["کم","متوسط","زیاد"],h='<div class="mx"><span></span>'+pl.map(function(n){return '<b>احتمال '+n+'</b>'}).join(""),im,p;
+for(im=3;im>=1;im--){h+='<b>اثر '+pl[im-1]+'</b>';for(p=1;p<=3;p++){var c=p*im<=2?'g':p*im<=4?'a':'r';h+='<div class="mc" style="--rc:var(--'+c+')">'+I.filter(function(i){return Q[i][0]==p&&Q[i][1]==im}).map(function(i){return '<button class="bd" data-d="'+i+'" style="background:'+SEC[P[i].s].c+'" title="'+P[i].n+'">'+fa(i+1)+'</button>'}).join("")+'</div>'}}
+$("mtx").innerHTML=h+'</div><div class="lgd">'+I.map(function(i){return '<span>'+fa(i+1)+': '+P[i].n+'</span>'}).join("")+'</div><p class="sm">برای مشاهدهٔ جزئیات روی شمارهٔ هر پروژه کلیک کنید.</p>'}
+document.addEventListener("click",function(e){if(e.target.closest("[data-pr]")){try{window.print()}catch(x){}}});
+var ek=null,TD=[1450,720,980,640,1100,860,540,760,1320,1650,520,310],TP=[64,38,46,22,58,41,27,35,72,88,30,18],TC=[48,30,40,16,52,36,24,28,56,70,22,20];
+function epd(I){var el=$("epd");if(ek===null){el.style.display="none";return}
+var T=[TD,TP,TC][ek],nm=["مدارک مهندسی","پکیج‌های خرید","پکیج‌های ساخت و اجرا"][ek],un=ek?"پکیج":"مدرک",col=["#3b82d6","#e8832f","#2fa87e"][ek],rows="",gt=0,gd=0,gp=0;
+function dn(i,j){return Math.round(T[i]*X[i].e[2*ek+j]/100)}
+function cells(t,d,q){var a=t?d/t*100:0,p=t?q/t*100:0,dv=a-p,c=dv>=-2?'g':dv>=-8?'a':'r';return '<td>'+fa(t)+'</td><td>'+fa(d)+'</td><td>'+fa(t-d)+'</td><td><span class="pb" style="--c:'+col+'"><i style="width:'+a+'%"></i></span>'+fa(a)+'٪</td><td>'+fa(p)+'٪</td><td><span class="tag" style="background:var(--'+c+')">'+fa(dv)+'٪</span></td><td>'+(a>=100?'تکمیل':a==0?'شروع‌نشده':'در جریان')+'</td>'}
+Object.keys(SEC).forEach(function(k){var J=I.filter(function(i){return P[i].s==k});if(!J.length)return;
+var t=sm(J,function(i){return T[i]}),d=sm(J,function(i){return dn(i,0)}),q=sm(J,function(i){return dn(i,1)});gt+=t;gd+=d;gp+=q;
+rows+='<tr class="sub" style="--c:'+SEC[k].c+'"><td>'+SEC[k].n+'</td>'+cells(t,d,q)+'</tr>';
+J.forEach(function(i){var op=pk===ek+"-"+i;rows+='<tr class="pkt" data-pk="'+i+'" tabindex="0"><td>'+(op?'▾ ':'▸ ')+fa(i+1)+'. '+P[i].n+'</td>'+cells(T[i],dn(i,0),dn(i,1))+'</tr>'+(op?'<tr class="pkr"><td colspan="8">'+pkgs(i)+'</td></tr>':'')})});
+el.style.display="block";
+el.innerHTML='<h2 style="--hc:'+col+'">جزئیات '+nm+' — به تفکیک بخش و پروژه</h2>'+(true?'<p class="sm" style="margin:0 0 8px">اختیاری: برای مشاهدهٔ ریز '+(ek?'پکیج‌ها':'مدارک هر دیسیپلین')+' و وضعیت هرکدام، روی ردیف پروژهٔ موردنظر کلیک کنید (دوباره کلیک = بستن).</p>':'')+'<div class="kpis">'+kp('کل '+un+'‌ها',fa(gt),'در سبد')+kp('انجام‌شده',fa(gd),fa(gd/gt*100,1)+'٪ پیشرفت')+kp('مانده',fa(gt-gd),'تا تکمیل')+kp('برنامه‌ای',fa(gp/gt*100,1)+'٪','تا امروز')+'</div><div class="tw"><table class="t2" style="min-width:700px"><thead><tr><th>بخش / پروژه</th><th>کل</th><th>انجام‌شده</th><th>مانده</th><th>پیشرفت واقعی</th><th>برنامه‌ای</th><th>انحراف</th><th>وضعیت</th></tr></thead><tbody>'+rows+'</tbody></table></div><p class="sm">تعداد '+un+'‌ها نمونه است و درصدها بر مبنای تعداد محاسبه شده‌اند.</p><button class="eb" style="--c:'+col+'" data-ep="'+ek+'">بستن جزئیات ▴</button>'}
+document.addEventListener("click",function(e){var b=e.target.closest("[data-ep]");if(b){var k=+b.dataset.ep;ek=ek===k?null:k;render2();if(ek!==null)$("epd").scrollIntoView({behavior:"smooth",block:"nearest"})}});
+var pk=null,PT=[["پمپ‌ها","کمپرسورها","مبدل‌های حرارتی","مخازن و درام‌ها","لوله و اتصالات","شیرآلات","تجهیزات برقی","ابزار دقیق"],["عملیات خاکی و فونداسیون","سازهٔ فلزی","لوله‌کشی","نصب تجهیزات مکانیکی","برق و ابزار دقیق","عایق و رنگ","ساختمان‌ها","پیش‌راه‌اندازی"]],MU=[1.3,1.2,1.1,1,.95,.9,.8,.75],CO=["نگین صنعت","پارس‌پایا","آذرکوه","سپهر انرژی","دریاسازه"];
+function pkgs(i){if(ek==0)return dsc(i);var b=X[i].e[2*ek],h='<table class="t2"><thead><tr><th>'+(ek==1?'پکیج خرید':'پکیج ساخت و اجرا')+'</th><th>'+(ek==1?'تأمین‌کننده':'پیمانکار')+'</th><th>پیشرفت</th><th>وضعیت</th></tr></thead><tbody>';
+for(var j=0;j<8;j++){var a=Math.min(100,Math.round(b*MU[j])),s,c;
+if(ek==1){s=a>=100?'تحویل‌شده':a>=70?'در حال حمل':a>=30?'در حال ساخت':a>0?'سفارش‌شده':'در مناقصه'}
+else{s=a>=100?'تکمیل':a>=70?'در مراحل پایانی':a>0?'در حال اجرا':'شروع‌نشده'}
+c=a>=100?'var(--g)':a>=30?'var(--ac)':a>0?'var(--a)':'var(--mu)';
+h+='<tr><td>'+PT[ek-1][j]+'</td><td>'+CO[(i+j)%5]+'</td><td><span class="pb" style="--c:'+c+'"><i style="width:'+a+'%"></i></span>'+fa(a)+'٪</td><td><span class="tag" style="background:'+c+'">'+s+'</span></td></tr>'}
+return h+'</tbody></table><p class="sm">۸ پکیج کلیدی نمونه از کل پکیج‌های این پروژه نمایش داده شده است.</p>'}
+function tpk(r){var i=+r.dataset.pk,k=ek+"-"+i;pk=pk===k?null:k;render2()}
+document.addEventListener("click",function(e){var r=e.target.closest("tr[data-pk]");if(r)tpk(r)});
+document.addEventListener("keydown",function(e){if(e.key=="Enter"){var r=e.target.closest&&e.target.closest("tr[data-pk]");if(r)tpk(r)}});
+var DS=["فرایند","مکانیک","لوله‌کشی","سازه و عمران","برق","ابزار دقیق و کنترل","ایمنی و محیط‌زیست","مخابرات"],SH=[.14,.16,.20,.18,.12,.12,.05,.03];
+function dsc(i){var b=X[i].e[0],h='<table class="t2"><thead><tr><th>دیسیپلین</th><th>کل مدارک</th><th>صادرشده</th><th>مانده</th><th>پیشرفت</th><th>وضعیت</th></tr></thead><tbody>';
+for(var j=0;j<8;j++){var t=Math.round(TD[i]*SH[j]),a=b>=100?100:Math.min(99,Math.round(b*MU[j])),d=Math.round(t*a/100),s=a>=100?'تکمیل (IFC)':a>=70?'در مرحله بازنگری':a>0?'در حال تهیه':'شروع‌نشده',c=a>=100?'var(--g)':a>=30?'var(--ac)':a>0?'var(--a)':'var(--mu)';
+h+='<tr><td>'+DS[j]+'</td><td>'+fa(t)+'</td><td>'+fa(d)+'</td><td>'+fa(t-d)+'</td><td><span class="pb" style="--c:'+c+'"><i style="width:'+a+'%"></i></span>'+fa(a)+'٪</td><td><span class="tag" style="background:'+c+'">'+s+'</span></td></tr>'}
+return h+'</tbody></table><p class="sm">تقسیم مدارک بین دیسیپلین‌ها نمونه است.</p>'}
+render();
+</script>
+</body>
+</html>
